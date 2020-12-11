@@ -4,8 +4,23 @@
 import sys
 from subprocess import PIPE, Popen, STDOUT
 from threading  import Thread
-#import json
+import json
 import datetime
+from paho.mqtt import publish
+
+def mqtt_publish_single(message):
+    publish.single(
+        topic=config['mqtt']['topic'],
+        payload=message,
+        hostname=config['mqtt']['host'],
+        port=config['mqtt']['port']
+    )
+
+    return 'something'
+
+# load configuration file
+with open('config.json', 'r') as config_file:
+    config = json.load(config_file)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 # 146 = FT-020T WeatherRack2, #147 = F016TH SDL Temperature/Humidity Sensor
@@ -69,6 +84,7 @@ while True:
         if (( sLine.find('FT0300') != -1) or ( sLine.find('FT020T') != -1)):
             sys.stdout.write('WeatherSense WeatherRack2 FT020T found' + '\n')
             sys.stdout.write('This is the raw data: ' + sLine + '\n')
+            mqtt_publish_single(sLine)
 
 
     sys.stdout.flush()
