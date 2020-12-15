@@ -19,10 +19,10 @@ to Run:
 sudo python3 readWeatherSensors.py
 
 
-#Description
+# Description
 The repository is forked from [SwitchDoc Labs WeatherRack2 Raspberry Pi repository](https://github.com/switchdoclabs/SDL_Pi_WeatherRack2). The weather rack can be purchased from SwitchDoc Labs [here](https://shop.switchdoc.com/products/wireless-weatherrack2). The software provided by SwitchDoc Labs supports reading sensor data from the weather rack. The code in this repository supports the post-processing of the sensor data read from the weather rack.
 
-##Dependencies
+## Dependencies
 The post-processing of the sensor data requires the following dependencies:
 1. Running [Node-RED](https://www.nodered.org) server with the following node collections added to the pallette:
     1. [node-red-contrib-blynk-ws](https://github.com/gablau/node-red-contrib-blynk-ws)
@@ -31,8 +31,8 @@ The post-processing of the sensor data requires the following dependencies:
 3. [Blynk](https://blynk.io/en/developers) developer account
 4. Blynk [iOS](https://apps.apple.com/us/app/blynk-iot-for-arduino-esp32/id808760481) or [Android](https://play.google.com/store/apps/details?id=cc.blynk) mobile phone application
 
-###Node-RED flow
+### Node-RED flow
 ![Mallory Node-RED flow](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherSenseMalloryNodeRED.png)
 
-###Blynk iOS application
+### Blynk iOS application
 ![Blynk iOS application](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherSenseMalloryBlynk.jpg)
