@@ -8,15 +8,20 @@ import json
 import datetime
 from paho.mqtt import publish
 
+
 def mqtt_publish_single(message):
-    publish.single(
-        topic=config['mqtt']['topic'],
+    topic = '{0}{1}'.format(config['station']['name'], config['mqtt']['topic_suffix'])
+    
+    response = publish.single(
+        topic=topic,
         payload=message,
         hostname=config['mqtt']['host'],
-        port=config['mqtt']['port']
+        port=config['mqtt']['port'],
+        qos=config['mqtt']['qos']
     )
 
-    return 'something'
+    return response
+
 
 # load configuration file
 with open('config.json', 'r') as config_file:
@@ -81,6 +86,7 @@ while True:
         if (( sLine.find('F007TH') != -1) or ( sLine.find('F016TH') != -1)):
             sys.stdout.write('WeatherSense Indoor T/H F016TH Found' + '\n')
             sys.stdout.write('This is the raw data: ' + sLine + '\n')
+            mqtt_publish_single(sLine)
         if (( sLine.find('FT0300') != -1) or ( sLine.find('FT020T') != -1)):
             sys.stdout.write('WeatherSense WeatherRack2 FT020T found' + '\n')
             sys.stdout.write('This is the raw data: ' + sLine + '\n')
