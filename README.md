@@ -31,8 +31,31 @@ The post-processing of the sensor data requires the following dependencies:
 3. [Blynk](https://blynk.io/en/developers) developer account
 4. Blynk [iOS](https://apps.apple.com/us/app/blynk-iot-for-arduino-esp32/id808760481) or [Android](https://play.google.com/store/apps/details?id=cc.blynk) mobile phone application
 
+### Blynk Pin Configuration
+Channel/Sensor | Temperature | Humidity | Battery | Time
+-------------- | ----------- | -------- | ------- | ----
+0 (Outdoor) | 0 | 9 | 18 | 27
+1 | 1 | 10 | 19 | 28
+2 | 2 | 11 | 20 | 29
+3 | 3 | 12 | 21 | 30
+4 | 4 | 13 | 22 | 31
+5 | 5 | 14 | 23 | 32
+6 | 6 | 15 | 24 | 33
+7 | 7 | 16 | 25 | 34
+8 | 8 | 17 | 26 | 35
+
+
+Sensor | Pin
+------ | ---
+Average Wind Speed | 36
+Gust Wind Speed | 37
+Wind Direction | 38
+Light Intensity | 39
+UV Intensity | 40
+Cumulative Rain | 41
+
 ### Node-RED flow
 ![Mallory Node-RED flow](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherSenseMalloryNodeRED.png)
 
-### Blynk iOS application
-![Blynk iOS application](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherSenseMalloryBlynk.jpg)
+### Blynk application
+![Blynk application](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherSenseMalloryBlynk.png)
