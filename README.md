@@ -52,7 +52,7 @@ abbr = quadrants[quadrant];
 ```
 
 ### Blynk considerations
-The most important note regarding the flow is the utilization of the Blynk WebSockets write node. The node is configured to be *Dynamic*. As a result, the pin is set in `msg.pin` in the preceding function node for every value that is being passed to Blynk. The function node does not automatically pass through the message payload. As a result, a message payload must be set within the function even if the function is simply passing along the received messsage payload. The following code snippet shows a function node that is setting the Blynk pin and passing along the received payload.
+The most important note regarding the flow is the utilization of the Blynk WebSockets write node. The node is configured to be *Dynamic*. As a result, the pin is set in `msg.pin` in the preceding function node for every value that is being passed to Blynk. The function node does not automatically pass through the message payload. As a result, a message payload must be set within the function even if the function is simply passing along the received message payload. The following code snippet shows a function node that is setting the Blynk pin and passing along the received payload.
 
 ```
 msg.payload = msg.payload;
