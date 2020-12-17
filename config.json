@@ -1,7 +1,11 @@
 {
+    "station": {
+        "name": "ws/cameron"
+    },
     "mqtt": {
         "host": "localhost",
         "port": 1883,
-        "topic": "cameron/telemetry/"
+        "topic_suffix": "/telemetry/",
+        "qos": 0
     }
 }
