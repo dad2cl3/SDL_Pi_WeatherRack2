@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS weather.t_readings (
     reading_id INT8 NOT NULL DEFAULT NEXTVAL('weather.seq_weather_reading_id'),
-    reading_ts TIMESTAMP NOT NULL,
+    reading_ts TIMESTAMPTZ NOT NULL,
     reading_device VARCHAR(100) NOT NULL,
     reading_device_channel INT2 NOT NULL,
     reading JSONB NOT NULL,

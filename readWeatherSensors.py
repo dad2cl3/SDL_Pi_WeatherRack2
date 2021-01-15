@@ -9,18 +9,33 @@ import datetime
 from paho.mqtt import publish
 
 
+def add_timezone(data):
+    data = json.loads(data)
+
+    if 'time' in data:
+        # expected format is %Y-%m-%d %H:%M:%S
+        local_time = datetime.datetime.strptime(data['time'], '%Y-%m-%d %H:%M:%S').astimezone()
+        # print(local_time)
+        utc_time = local_time.astimezone(datetime.timezone.utc)
+        # print(utc_time)
+        utc_time_str = utc_time.strftime('%Y-%m-%d %H:%M:%S %z')
+        data['time'] = utc_time_str
+    
+    return json.dumps(data)
+        
 def mqtt_publish_single(message):
     topic = '{0}{1}'.format(config['station']['name'], config['mqtt']['topic_suffix'])
     
-    response = publish.single(
-        topic=topic,
-        payload=message,
-        hostname=config['mqtt']['host'],
-        port=config['mqtt']['port'],
-        qos=config['mqtt']['qos']
-    )
-
-    return response
+    try:
+        publish.single(
+            topic=topic,
+            payload=message,
+            hostname=config['mqtt']['host'],
+            port=config['mqtt']['port'],
+            qos=config['mqtt']['qos']
+        )
+    except ConnectionError as ce:
+        print('Mosquitto not available')
 
 
 # load configuration file
@@ -37,7 +52,7 @@ cmd = [ '/usr/local/bin/rtl_433', '-q', '-F', 'json', '-R', '146', '-R', '147']
 #   A few helper functions...
 
 def nowStr():
-    return( datetime.datetime.now().strftime( '%Y-%m-%d %H:%M:%S'))
+    return( datetime.datetime.now().strftime( '%Y-%m-%d %H:%M:%S %z'))
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 #stripped = lambda s: "".join(i for i in s if 31 < ord(i) < 127)
@@ -82,14 +97,18 @@ while True:
         pulse -= 1
         sLine = line.decode()
         print(sLine)
+        
         #   See if the data is something we need to act on...
         if (( sLine.find('F007TH') != -1) or ( sLine.find('F016TH') != -1)):
             sys.stdout.write('WeatherSense Indoor T/H F016TH Found' + '\n')
             sys.stdout.write('This is the raw data: ' + sLine + '\n')
+            sLine = add_timezone(sLine)
+            # print(sLine)
             mqtt_publish_single(sLine)
         if (( sLine.find('FT0300') != -1) or ( sLine.find('FT020T') != -1)):
             sys.stdout.write('WeatherSense WeatherRack2 FT020T found' + '\n')
             sys.stdout.write('This is the raw data: ' + sLine + '\n')
+            sLine = add_timezone(sLine)
             mqtt_publish_single(sLine)
 
 
