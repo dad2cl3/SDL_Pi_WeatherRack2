@@ -62,7 +62,7 @@ return msg;
 ```
 
 ### Node-RED flow
-![Mallory Node-RED flow](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherRacksMalloryNodeRED.png)
+![Mallory Node-RED flow](https://github.com/dad2cl3/SDL_Pi_WeatherRack2/blob/master/doc/WeatherRackMalloryNodeRED.png)
 ### Blynk Pin Configuration
 Channel/Sensor | Temperature | Humidity | Battery | Time
 -------------- | ----------- | -------- | ------- | ----
