@@ -1,0 +1,15 @@
+[Unit]
+Description=WeatherRack2
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+StandardOutput=file:/var/pyapps/SDL_Pi_WeatherRack2/logs/weatherrack2.out
+StandardError=file:/var/pyapps/SDL_Pi_WeatherRack2/logs/weatherrack2.err
+WorkingDirectory=/var/pyapps/SDL_Pi_WeatherRack2
+ExecStart=/usr/bin/python3 /var/pyapps/SDL_Pi_WeatherRack2/readWeatherSensors.py
+
+[Install]
+WantedBy=multi-user.target
